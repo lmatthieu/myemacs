@@ -1,0 +1,4 @@
+myemacs
+=======
+
+Emacs config
