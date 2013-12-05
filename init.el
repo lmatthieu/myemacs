@@ -14,7 +14,7 @@
                       volatile-highlights htmlize highlight-symbol
                       evil auto-complete smart-tab diminish
                       color-theme-sanityinc-solarized fill-column-indicator
-		      zenburn-theme
+		      zenburn-theme elpy
 		      ein))
 
 (defun my-packages-installed-p ()
@@ -83,6 +83,9 @@
 (require 'two-mode-mode)
 (require 'hy-mode)
 
+(autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
+(add-hook 'hy-mode-hook             #'enable-paredit-mode)
+
 (defun pyhy-mode ()
   "Treat the current buffer as a literate Emacs Lisp program."
   (interactive)
@@ -95,6 +98,8 @@
                             )))
   (two-mode-mode))
 
+(add-to-list 'auto-mode-alist '("\\.py\\'" . pyhy-mode))
+
 (load-theme 'zenburn t)
 
 (custom-set-variables
@@ -102,7 +107,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(inhibit-startup-screen t))
+ '(inhibit-startup-screen t)
+ '(safe-local-variable-values (quote ((encoding . utf-8)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

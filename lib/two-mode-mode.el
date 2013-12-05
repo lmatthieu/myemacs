@@ -41,22 +41,28 @@
 ;      (if (eq font-lock-mode t)		  
 ;          (font-lock-fontify-buffer))
 ;	  (font-lock-fontify-buffer)
-	  )))
+		  )))
 
 (defun two-mode-mode-update-mode ()
   (let ((lm -1)
-        (rm -1))
+        (rm -1)
+	(sxp -1))
     (save-excursion 
       (if (search-backward two-mode-lmatch nil t)
+	(progn
           (setq lm (point))
-        (setq lm -1)))
+	  (setq sxp (scan-lists lm 1 0)))
+	(progn
+          (setq lm -1)
+	  (setq sxp -1))))
     (save-excursion
       (if (search-backward two-mode-rmatch nil t)
           (setq rm (point))
         (setq rm -1)))
-    (if (and (= lm -1) (= rm -1))
+    (message "L %s %s %s %s" lm rm sxp (point))
+    (if (and (= lm -1)); (= rm -1))
         (two-mode-change-mode (cadr default-mode))
-      (if (>= lm rm)
+      (if (and (<= lm (point)) (< (point) sxp)); (>= lm rm)
           (two-mode-change-mode (cadr second-mode))
         (two-mode-change-mode (cadr default-mode))))))
 
