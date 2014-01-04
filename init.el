@@ -10,12 +10,8 @@
 ;; required because of a package.el bug
 (setq url-http-attempt-keepalives nil)
 
-(defvar my-packages '(paredit expand-region gist helm helm-projectile magit melpa
-                      volatile-highlights htmlize highlight-symbol
-                      evil auto-complete smart-tab diminish
-                      color-theme-sanityinc-solarized fill-column-indicator
-		      zenburn-theme elpy
-		      ein))
+(defvar my-packages '(paredit  evil auto-complete smart-tab fill-column-indicator
+		      zenburn-theme))
 
 (defun my-packages-installed-p ()
   (loop for p in my-packages

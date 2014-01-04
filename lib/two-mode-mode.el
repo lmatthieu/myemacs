@@ -59,7 +59,6 @@
       (if (search-backward two-mode-rmatch nil t)
           (setq rm (point))
         (setq rm -1)))
-    (message "L %s %s %s %s" lm rm sxp (point))
     (if (and (= lm -1)); (= rm -1))
         (two-mode-change-mode (cadr default-mode))
       (if (and (<= lm (point)) (< (point) sxp)); (>= lm rm)
